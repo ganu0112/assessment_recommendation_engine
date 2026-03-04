@@ -3,10 +3,13 @@ import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import cosine_similarity  # Load dataset
+import os
 
-# Load dataset
-df = pd.read_csv("data/processed/shl_full_catalogue.csv")
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "data", "processed", "shl_full_catalogue.csv")
+
+df = pd.read_csv(DATA_PATH)
 
 df["combined_text"] = (
     df["name"].fillna("") + " " +
